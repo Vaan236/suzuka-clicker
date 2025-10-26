@@ -1,0 +1,574 @@
+body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    background: #01a801;
+    color: white;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+h1 {
+    color: #FFA500; /* Orange text for Silence Suzuka */
+    font-size: 3rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 5px #FF8C00; /* Glow effect */
+}
+
+h2 {
+    color: #ffffff; /* White text */
+    font-size: 2.5rem;
+    margin-top: 5px; 
+    text-shadow: 0px 0px 10px #006400; /* Stronger green glow effect */
+}
+
+.animation-container {
+  display: flex; /* Enable flexbox */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+  justify-content: flex-start; /* Align items to the top */
+  height: auto; /* Adjust height to fit content */
+  overflow: visible; /* Ensure no hidden content */
+  padding-top: 20px; /* Keep some space at the top */
+  max-width: 100%; /* Prevent content from exceeding screen width */
+}
+
+.click-info {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.click-info p {
+  margin-top: 5px; /* Reduce space between paragraphs */
+  margin-bottom: 5px; /* Reduce space below paragraphs */
+}
+
+button {
+  margin-top: 500px; /* Add space above the button */
+  background-color: #FFA500; /* Orange button */
+  color: white; /* White text */
+  border: 2px solid #006400; /* Green border */
+  border-radius: 10px;
+  padding: 15px 30px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5); /* Button shadow */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.1); 
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.7); /* Stronger shadow */
+}
+
+button:active {
+  transform: scale(0.9); 
+}
+
+p {
+  margin-top: 20px; /* Add space above the click count */
+  font-size: 1.8rem;
+  color: white;
+}
+
+.suzuka-image {
+  position: absolute;
+  width: 150px; /* Fixed width */
+  height: 150px; /* Fixed height */
+  object-fit: cover; /* Ensures the image fills the dimensions */
+  transition: left 1.5s ease-in-out; /* Smooth animation */
+  max-width: 100%; /* Ensure images fit within the screen */
+}
+
+.concert-highlights {
+  padding: 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.concert-highlights h2 {
+  color: #ffe137; /* Gold brown color for the title */
+  font-size: 34px;
+  margin-bottom: 1px;
+}
+
+.concert-highlights p {
+  color: #473d00; /* Gold brown color for the title */
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.concert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-items: stretch; /* let items expand to column width */
+  gap: 28px;
+  max-width: 1200px; /* keep overall container reasonable so images look wide */
+  margin: 0 auto;
+}
+
+.concert-item {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.concert-item img {
+  width: 100%;
+  height: 380px; /* taller so thumbnails look wide and prominent */
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.14);
+  object-fit: contain;
+  display: block;
+}
+
+.concert-item img:hover {
+    transform: scale(1.05);
+}
+
+.concert-item p {
+    margin-top: 10px;
+    font-size: 20px;
+    color: #333;
+}
+
+/* comment section */
+.comment-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.comment-section h2 {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.comment-section p {
+    color: black;
+    font-size: 20px;
+}
+
+.comment-input {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+}
+
+.comment-input input {
+  padding: 10px;
+  width: 100%;
+  margin-right: 10px;
+}
+
+.comment-input button {
+  padding: 10px 20px;
+  margin-top: 10px;
+}
+
+/* Center the reCAPTCHA box */
+.recaptcha-container {
+    margin-top: 10px; /* Add spacing above the CAPTCHA */
+}
+
+
+.comment-title-container{
+  margin-top: 20px;
+}
+
+/* comment section scroll */
+.comment-list-container {
+  /* Size / layout */
+  width: min(940px, 95vw); /* fixed max width for desktop but responsive */
+  margin: 0 auto; /* center horizontally */
+  max-height: 340px; /* visible area height */
+  box-sizing: border-box; /* include padding in width calculations */
+  padding: 12px; /* inner spacing */
+  overflow-y: auto; /* vertical scrolling */
+  overflow-x: hidden; /* prevent horizontal scrolling */
+
+  /* Visuals */
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #5C4033; /* dark brown text */
+  border: 2px solid #50C878; /* emerald border */
+  border-radius: 10px;
+  box-shadow: 0 6px 10px rgba(0,0,0,0.12);
+}
+
+.comment-list p {
+  background-color: #e0e0e0;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+/* Add styles for the CommentList and Comment components */
+.comment-item {
+  display: grid;
+  grid-template-columns: 1fr; /* stack meta above text for simpler layout */
+  gap: 6px; /* space between meta and text */
+  margin-bottom: 10px; /* spacing between comment blocks */
+  padding: 10px; /* inner padding for each comment */
+  background: rgba(255,255,255,0.9); /* a light card background */
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  width: 100%;
+  box-sizing: border-box; /* ensure padding doesn't increase width */
+}
+
+.comment-meta {
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-meta strong {
+  display: block;
+  font-size: 16px;
+  color: black;
+}
+
+.comment-meta small {
+  display: block;
+  font-size: 12px;
+  color: gray;
+}
+
+/* Ensure long strings in comments wrap and stay visible */
+.comment-text {
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  /* ensure very long unbroken strings don't expand the container */
+  word-break: break-all;
+  white-space: pre-wrap;
+  font-weight: 400;
+  font-size: 15px;
+  color: #111;
+  line-height: 1.45;
+  max-width: 100%;
+}
+
+/* Thin custom scrollbar for WebKit browsers */
+.comment-list-container::-webkit-scrollbar {
+  width: 10px;
+}
+.comment-list-container::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+}
+.comment-list-container::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.2);
+  border-radius: 10px;
+}
+
+/* Align comment rules to the left */
+.comment-rules {
+  max-width: 400px;
+  width: 90%;
+  margin: 0 auto 12px; /* center and add spacing on small screens */
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  text-align: left; /* Align text to the left */
+}
+
+/* Friendly note under the rules encouraging respectful comments */
+.comment-guidelines {
+  margin-top: 12px;
+  background: rgba(0,0,0,0.03);
+  border-left: 4px solid #50C878; /* subtle green accent */
+  padding: 10px 12px;
+  border-radius: 6px;
+  color: #222;
+  font-size: 14px;
+}
+
+.comment-rules h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.comment-rules ul {
+    padding-left: 20px;
+}
+
+.comment-rules li {
+    margin-bottom: 10px;
+}
+
+.cooldown-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+  }
+
+  .suzuka-image {
+    width: 100px; /* Reduce image size for mobile */
+    height: 100px; /* Maintain aspect ratio */
+  }
+
+  .animation-container {
+    padding-top: 50px; /* Add space below h1 and h2 */
+  }
+
+  .concert-grid {
+    display: flex; /* Switch to flexbox */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    gap: 10px; /* Add spacing between items */
+  }
+
+  .concert-item img {
+    width: 350px; /* Smaller size for mobile */
+  }
+}
+
+/* For narrow phones, allow flexible columns and smaller thumbnails */
+@media (max-width: 600px) {
+  .concert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+  }
+
+  .concert-item img {
+    height: 220px;
+  }
+}
+
+/* iphone 12 */
+@media (max-width: 480px) {
+  
+  h1 {
+    font-size: 35px;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  .concert-grid {
+    display: flex; /* Switch to flexbox */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    gap: 10px; /* Add spacing between items */
+  }
+
+  .concert-item img {
+    width: 100%; /* Make images fill column */
+    height: auto; /* Maintain aspect ratio */
+  }
+
+  .animation-container {
+    height: auto; /* Ensure height fits content */
+    overflow: visible; /* Prevent hidden content */
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+
+  .animation-container p {
+    word-wrap: break-word; /* Ensure text wraps within the container */
+    margin: 5px 0; /* Adjust spacing for paragraphs */
+  }
+
+  body {
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+  }
+
+  .animation-container {
+    max-width: 100%; /* Ensure container fits within screen */
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+
+  /* Add horizontal padding so content doesn't touch device edges */
+  .animation-container,
+  .concert-highlights,
+  .comment-section {
+    padding-left: 12px;
+    padding-right: 12px;
+    box-sizing: border-box;
+  }
+
+  /* Ensure comment components leave room from the screen edge and inputs are slightly narrower */
+  .comment-rules,
+  .comment-list-container {
+    width: 92%;
+    max-width: 92%;
+    margin: 0 auto 12px;
+    box-sizing: border-box;
+  }
+
+  .comment-input input {
+    width: 90%;
+    max-width: 90%;
+    margin: 0 auto 8px;
+    box-sizing: border-box;
+  }
+
+  .animation-container p {
+    word-wrap: break-word; /* Ensure text wraps within the container */
+  }
+
+  .suzuka-image {
+    max-width: 100%; /* Ensure images fit within the screen */
+    bottom: 150px; /* Move Suzuka images higher above the button */
+  }
+}
+
+/* Add responsive design for comment section */
+.comment-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+@media (min-width: 768px) {
+  .comment-section {
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+  }
+
+  .comment-rules {
+    flex: 1;
+    margin-right: 20px;
+    max-width: 400px; /* Increased width */
+  }
+
+  .comment-input {
+    flex: 2;
+    max-width: 600px;
+  }
+
+  .comment-list-container {
+    flex: 2;
+    max-width: 600px;
+  }
+}
+
+/* Treat medium tablets (like iPad in portrait) as small screens: stack and center comment area */
+@media (max-width: 900px) {
+  .comment-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Center and limit width for rules and list so they leave space on tablet viewports */
+  .comment-rules,
+  .comment-list-container {
+    width: 92%;
+    max-width: 95vw;
+    margin: 0 auto 12px;
+    box-sizing: border-box;
+  }
+
+  /* Keep the input slightly narrower than the container and centered */
+  .comment-input input {
+    width: 92%;
+    max-width: 700px;
+    margin: 0 auto 8px;
+    display: block;
+    box-sizing: border-box;
+  }
+
+  /* Slightly tighten the concert grid on medium screens */
+  .concert-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+}
+
+/* Footer styles */
+.site-footer {
+  background: white;
+  color: #111;
+  padding: 28px 12px;
+  margin-top: 32px;
+}
+.site-footer .footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+.site-footer h3 {
+  margin: 0 0 8px;
+  color: #ffe137;
+  text-shadow: 0px 0px 10px #006400;
+}
+.site-footer p {
+  margin: 0 0 12px;
+  color: #000000;
+}
+.social-links {
+  display: flex; /* stack links vertically */
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+  align-items: center; /* center links horizontally */
+}
+.social-link {
+  color: #000000;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0;
+  background: transparent;
+}
+.social-link:hover {
+  text-decoration: underline;
+}
+.social-link {
+  display: flex; /* ensure consistent flex layout */
+  align-items: center; /* vertically center icon + text */
+  justify-content: left; /* center content horizontally within the anchor */
+  gap: 8px;
+  padding: 4px 6px; /* small tap target and consistent height */
+  font-size: 16px;
+}
+.social-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  object-fit: contain; /* preserve aspect and avoid stretching */
+}
+.social-text {
+  line-height: 1; /* keep text vertically centered */
+}
+.footer-note {
+  display: block;
+  margin-top: 8px;
+  color: #000000;
+}
+
+@media (max-width: 480px) {
+  .social-links { gap: 8px; }
+  .site-footer { padding: 20px 8px; }
+}
+
+/* small label above the social links */
+.socials-label {
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 4px;
+}
