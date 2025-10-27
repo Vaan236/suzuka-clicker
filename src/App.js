@@ -118,7 +118,7 @@ function App() {
       // Update local state with the new comment
       setComments((prevComments) => {
         const updatedComments = [newCommentData, ...prevComments];
-        return updatedComments.slice(0, 20); // Limit to 20 comments
+        return updatedComments.slice(0, 30); // Limit to 30 comments
       });
 
       // Clear the input field and reset CAPTCHA

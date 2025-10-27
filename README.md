@@ -1,74 +1,32 @@
-# suzuka-clicker
-Click the button to spam Suzuka
-=======
-# Getting Started with Create React App
+# Suzuka Clicker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to **Suzuka Clicker**, a fun and interactive website where you can enjoy the following features:
 
-## Available Scripts
+Features
 
-In the project directory, you can run:
+### 1. **Kimochi Yokatta Button**
+- Push the **Kimochi Yokatta** button to make **Silence Suzuka** appear on the screen.
+- Spam the button to see more Suzuka animations!
 
-### `npm start`
+### 2. **Concert Highlights**
+- Explore Suzuka's famous concerts.
+- Click on the concert images to watch the videos.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 3. **Comment Section**
+- Share your thoughts in the comment section.
+- CAPTCHA verification ensures only real users can comment.
+- A cooldown period prevents spam comments.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Goals
+- Reach **5,000,000 clicks** to unlock new features and improvements for the website.
 
-### `npm test`
+## How to Use
+1. Click the **Kimochi Yokatta** button.
+2. Watch Suzuka animations and enjoy her concert highlights.
+3. Leave a comment and interact with other users.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Future Plans
+- The website will be improved once the click goal is reached.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Thank you for visiting **Suzuka Clicker**! Enjoy your time here!
 
