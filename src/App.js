@@ -408,7 +408,7 @@ function App() {
           <div className="social-links">
             {/* Add a small label to indicate this block contains socials */}
             <div className="socials-label">Socials</div>
-            <a className="social-link" href="mailto:youremail@example.com">Email</a>
+            <a className="social-link" href="mailto:dev.vaan@proton.me">dev.vaan@proton.me</a>
             <a className="social-link" href="https://x.com/VaanAqua" target="_blank" rel="noreferrer">
               <img src={xPng} alt="X" className="social-icon" />
               <span className="social-text">@VaanAqua</span></a>
