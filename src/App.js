@@ -2,7 +2,8 @@ import './App.css';
 import React, { useState, useEffect, useRef } from 'react';
 import db from './firebaseConfig';
 import { collection, addDoc, getDocs, orderBy, query, limit, deleteDoc } from 'firebase/firestore';
-import ReCAPTCHA from 'react-google-recaptcha'; //import reCAPTCHA
+import { supabase } from './supabaseClient';
+import ReCAPTCHA from 'react-google-recaptcha';
 import githubPng from './assets/github.png';
 import xPng from './assets/X.png';
 
@@ -13,6 +14,7 @@ function App() {
   const [captchaVerified, setCaptchaVerified] = useState(false);
   const [cooldownActive, setCooldownActive] = useState(false); //Cooldown state
   const [cooldownMessage, setCooldownMessage] = useState(""); // Cooldown message
+  const [showRecaptcha, setShowRecaptcha] = useState(false); // Lazy load reCAPTCHA
   const commentContainerRef = useRef(null); // Ref for the comment container
   const previousScrollPosition = useRef(0); // Ref to store the previous scroll position
   const isAddingComment = useRef(false); // Flag to track if a comment is being added
@@ -151,24 +153,26 @@ function App() {
   };
 
   //updates total clicks when the app loads
+
   useEffect(() => {
-    const fetchTotalClicks = () => {
-      fetch('http://localhost:5000/clicks')
-      .then((response) => response.json())
-      .then((data) => {
-        setClickCount(data.totalClicks); //updates click counts
-      })
-    .catch((error) => {
-      console.log('Error fetching total clicks:', error);
-    });
-  };
-  
-  fetchTotalClicks();
-
-  const interval = setInterval(fetchTotalClicks, 5000)
-
-  return () => clearInterval(interval);
-}, []);
+    // Fetch click count from Supabase
+    const fetchTotalClicks = async () => {
+      const { data, error } = await supabase
+        .from('clicks')
+        .select('count, id')
+        .maybeSingle();
+      if (error) {
+        console.error('Error fetching total clicks:', error);
+        return;
+      }
+      if (data && typeof data.count === 'number') {
+        setClickCount(data.count);
+      }
+    };
+    fetchTotalClicks();
+    const interval = setInterval(fetchTotalClicks, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   function handleClick() { 
     const audio = new Audio(process.env.PUBLIC_URL + '/suzuka.mp3');
@@ -177,54 +181,67 @@ function App() {
 
   // Array of Suzuka image URLs
   const suzukaImages = [
-    '/suzuka1.png',
-    '/suzuka2.png',
-    '/suzuka3.png',
+    '/suzuka1.png'
   ];
 
   // Select a random image
   const randomImage = suzukaImages[Math.floor(Math.random() * suzukaImages.length)];
+
 
   // Declare suzukaImage before using it
   const suzukaImage = document.createElement('img');
   suzukaImage.src = randomImage; // Set the random image
   suzukaImage.alt = 'Silence Suzuka';
   suzukaImage.className = 'suzuka-image';
-  suzukaImage.style.position = 'absolute'; // Keep position-related styles if needed
 
   // Adjust positions based on screen size
   const isMobile = window.innerWidth <= 768;
-  const positions = isMobile ? [300, 400, 500] : [250, 300, 450]; // Different positions for mobile
+  const positions = isMobile ? [300] : [250]; // Different positions for mobile
   suzukaImage.style.top = `${positions[Math.floor(Math.random() * positions.length)]}px`;
-  suzukaImage.style.left = '-100px';
 
+  suzukaImage.style.left = '-100px'; // Anchor to left edge, fully offscreen (image is 150px wide)
+  suzukaImage.style.transform = 'translateX(0)'; // Start at the left edge
 
   document.body.appendChild(suzukaImage);
 
+  // Force reflow to ensure the initial transform is applied
+  void suzukaImage.offsetWidth;
 
-  const screenWidth = window.innerWidth;
-  setTimeout(() => {
-    suzukaImage.style.left = `${screenWidth}px`; // Move completely off-screen
-  }, 100);
+  // Animate to the right using viewport width for mobile safety
+  suzukaImage.style.transform = 'translateX(calc(100vw + 100px))';
 
     const screenSize = detectScreenSize(); //detects whats the screen of user
-    const removalDelay = screenSize === "small" ? 1200 : screenSize === "medium" ? 1500 : 1800; // Adjust delay based on screen size
+    const removalDelay = screenSize === "small" ? 850 : screenSize === "medium" ? 1200 : 1800;
     setTimeout(() => {
       suzukaImage.remove();
     }, removalDelay); // Match the animation duration
 
-    // increase total clicks in the backend
-    fetch('http://localhost:5000/clicks', {
-        method: 'POST',
-    })
-      .then((response) => response.json())
-      .then((data) => {
-          setClickCount(data.totalClicks); // Update the click count
-      })
-          .catch((error) => {
-          console.error('Error incrementing total clicks:', error);
-      });
-    }
+
+    // Increment click count in Supabase
+    const incrementClick = async () => {
+      // Get the current row (should only be one row in 'clicks')
+      const { data, error } = await supabase
+        .from('clicks')
+        .select('count, id')
+        .maybeSingle();
+      if (error || !data) {
+        console.error('Error fetching click count:', error);
+        return;
+      }
+      const newCount = (data.count || 0) + 1;
+      // Update the count
+      const { error: updateError } = await supabase
+        .from('clicks')
+        .update({ count: newCount })
+        .eq('id', data.id);
+      if (updateError) {
+        console.error('Error updating click count:', updateError);
+        return;
+      }
+      setClickCount(newCount);
+    };
+    incrementClick();
+  }
 
     const concerts = [
     {
@@ -246,7 +263,6 @@ function App() {
 
   function detectScreenSize() {
     const screenWidth = window.innerWidth;
-    // const screenHeight = window.innerHeight;
 
     if (screenWidth <= 480) {
       console.log("Small screen detected (mobile).");
@@ -276,7 +292,6 @@ function App() {
   useEffect(() => {
     if (isAddingComment.current && commentContainerRef.current) {
       const scrollPos = previousScrollPosition.current;
-      // Restore immediately and again after a small delay to ensure it sticks
       commentContainerRef.current.scrollTop = scrollPos;
       
       requestAnimationFrame(() => {
@@ -353,7 +368,7 @@ function App() {
       </div>
       <section className="comment-section">
         <div className="comment-rules-container">
-          <p className="comment-rules">
+          <div className="comment-rules">
           <h3>Please note:</h3>
           <ul>
             <li>Comments have a <strong>cooldown</strong> period of <strong>10 minutes.</strong></li>
@@ -364,7 +379,7 @@ function App() {
           <div className="comment-guidelines">
             <strong>Be kind and keep it friendly.</strong> Please avoid profanity, personal attacks, or content that targets others. Respectful comments make this space welcoming for everyone.
           </div>
-        </p>
+        </div>
         </div>
         <div className="comment-input-container">
           <div className="comment-input">
@@ -372,17 +387,21 @@ function App() {
             type="text"
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
+            onFocus={() => setShowRecaptcha(true)}
             placeholder="Write a comment..."
             disabled={cooldownActive}
           />
-          <p>Character Count: {newComment.length}</p>  
-          <ReCAPTCHA 
+          <p>Character Count: {newComment.length}</p>
+          {showRecaptcha && (
+            <ReCAPTCHA
               className="recaptcha-container"
               sitekey="6LdjwPUrAAAAAI-rQETa9qhdlDBHeVmAFurjz9oc"
               onChange={handleCaptchaChange}
-          />
+            />
+          )}
           <button onClick={handleAddComment} disabled={cooldownActive}>
-            {cooldownActive ? "Please Wait..." : "Add Comment"}</button>
+            {cooldownActive ? "Please Wait..." : "Add Comment"}
+          </button>
           {cooldownActive && <p className="cooldown-message">{cooldownMessage}</p>}
         </div>
         <div ref={commentContainerRef} className="comment-list-container">
@@ -418,12 +437,10 @@ function App() {
             </a>
           </div>
         </div>
-        <small className="footer-note">Thanks for visiting — I read all messages and welcome friendly feedback.</small>
+        <small className="footer-note">Thanks for visiting! I read all messages and welcome friendly feedback.</small>
       </footer>
     </>
   );
 }
 
 export default App;
-
-/* Footer contact info added below by assistant */
