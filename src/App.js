@@ -335,8 +335,8 @@ function App() {
   return (
     <>
       <div className="animation-container">
-          <h1>Welcome to KimochiYokatta.com</h1>
-          <h2>Suzuka Clicker</h2>
+          <h1>Welcome to SilenceSuzuka.click</h1>
+          <h2>Silence Suzuka Clicker</h2>
           <button onClick={handleClick}>Kimochi Yokatta</button>
           <div className="click-info">
             <p>Clicks: {clickCount}</p>
