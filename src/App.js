@@ -435,8 +435,14 @@ function App() {
               <img src={githubPng} alt="GitHub" className="social-icon" />
               <span className="social-text">GitHub</span>
             </a>
-            <a href='https://ko-fi.com/H2H1CRJOQ' target='_blank' rel='noreferrer'>
-              <img height='36' style={{ border: '0px', height: '36px' }} src='https://storage.ko-fi.com/cdn/kofi2.png?v=6' alt='Buy Me a Coffee at ko-fi.com' />
+            <a href='https://ko-fi.com/R6R01NUF5P' target='_blank' rel='noreferrer'>
+              <img
+                height='36'
+                style={{ border: '0px', height: '36px' }}
+                src='https://storage.ko-fi.com/cdn/kofi2.png?v=6'
+                border='0'
+                alt='Buy Me a Coffee at ko-fi.com'
+              />
             </a>
           </div>
         </div>
